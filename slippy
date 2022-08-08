@@ -5,12 +5,16 @@
 # Written by Sam Axford (z5359407)
 # 8/8/2022
 
+
+
 import sys
 import re
 import os
 
-def is_valid_expression(str):
-    return True
+
+
+
+# -------------------------------- PARSING -------------------------------- #
 
 def parse_cmd_line(argv):
     in_place = False
@@ -110,7 +114,6 @@ def remove_backslash_before(delims, cmd):
         else:
             i += 1
     return cmd
-
 
 def parse_commands(sed_cmd):
     '''
@@ -296,12 +299,7 @@ def parse_tail(cmd, i):
 
 
 
-
-
-
-
-
-
+# -------------------------------- CLASSES -------------------------------- #
 
 class Command:
     def __init__(self, address1, address2):
@@ -383,6 +381,7 @@ class Command:
         
         return stream_line
 
+
 class Command_q(Command):
     def apply(self, stream_line, i, slippy):
         if not stream_line: return stream_line
@@ -441,7 +440,6 @@ class Command_s(Command):
                 return x
         return super().apply(s, stream_line, i)
 
-
 class Command_label(Command):
     def apply(self, stream_line, i):
         return stream_line
@@ -466,7 +464,6 @@ class Command_a(Command):
             return x
         return super().apply(a, stream_line, i)
         
-
 class Command_i(Command):
     def parse_arguments(self, cmd, i):
         self.args, i = parse_arguments_aci(cmd, i)
@@ -489,6 +486,7 @@ class Command_c(Command):
             x = ''
             return x
         return super().apply(c, stream_line, i)
+
 
 
 class Slippy():
@@ -575,6 +573,7 @@ class Slippy():
 
 
 
+# -------------------------------- MAIN -------------------------------- #
 
 if __name__ == '__main__':
     files, commands, options = parse_cmd_line(sys.argv)
