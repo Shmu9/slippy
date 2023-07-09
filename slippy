@@ -529,7 +529,6 @@ class Slippy():
                 line = next
                 next = input_stream.readline()
                 if not next:
-                    # TODO: ensure this does not occur on empty line, only after final line
                     line = self.apply_commands(line, -1) # -1 = end address $
                     if not options["n"]: # not quiet
                         print(line, end='')
@@ -552,7 +551,6 @@ class Slippy():
             while not self.quit:
                 line = input_stream.readline()
                 if not line:
-                    # TODO: ensure this does not occur on empty line, only after final line
                     break
                 line = self.apply_commands(line, self.i)
 
